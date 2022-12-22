@@ -1,0 +1,23 @@
+<h1>Photo-feed</h1>
+
+<h3>Enter the Flickr ID of your chosen user and see their most recent photos!</h3>
+
+<%= form_with(url: "/", method: :get, local: true) do |form| %> 
+    <div>
+        <%= form.label :user_id %><br>
+        <%= form.text_field :user_id%>
+    </div>
+
+    <div>
+        <%= form.submit "Search"%>
+    </div>
+<% end %>
+
+<% if params[:user_id] %>
+    <p>Here are their latest photos</p>
+    <% @photos.each do |photo| %>
+        <div>
+            <img src="<%= Flickr.url_n(photo) %>"/>
+        </div>
+    <% end %>
+<% end %>
